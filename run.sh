@@ -26,7 +26,7 @@ apt-get -y upgrade
 
 mkdir /tmp/deps
 cd /tmp/deps
-mk-build-deps --install --tool='apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes' $WORK/$PACKAGE/debian/control
+mk-build-deps --install --tool='apt-get -t buster-backports -o Debug::pkgProblemResolver=yes --no-install-recommends --yes' $WORK/$PACKAGE/debian/control
 cd "$WORK/$PACKAGE"
 
 su -c "${BUILD_CMD}" "${BUILD_UNAME}"
