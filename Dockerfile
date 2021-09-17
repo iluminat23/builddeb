@@ -2,6 +2,12 @@ FROM tianon/raspbian:stretch-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
 
+ADD "https://raw.githubusercontent.com/RevolutionPi/imagebakery/eee1738b82dd3a8c9b79f8e7ecc901bce39ac819/templates/revpi.list" etc/apt/sources.list.d/revpi.list
+ADD "https://github.com/RevolutionPi/imagebakery/raw/master/templates/revpi.gpg" revpi.gpg
+RUN apt-key add revpi.gpg \
+&& rm revpi.gpg
+
+
 # install build basics
 RUN apt-get update \
 && apt-get -y install \
