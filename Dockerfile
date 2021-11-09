@@ -1,4 +1,4 @@
-FROM tianon/raspbian:buster-slim
+FROM tianon/raspbian:bullseye-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
 
