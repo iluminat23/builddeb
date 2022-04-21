@@ -9,7 +9,15 @@ RUN apt-key add revpi.gpg \
 
 
 # install build basics
-RUN apt-get update \
+RUN \
+mv /etc/apt/sources.list /etc/apt/sources.list.bak \
+&& echo "deb http://mirror.chaoticum.net/rpi/raspbian/ buster main contrib non-free rpi" > /etc/apt/sources.list \
+&& apt-get update \
+&& apt-get -y install \
+	ca-certificates \
+	openssl \
+&& mv /etc/apt/sources.list.bak /etc/apt/sources.list \
+&& apt-get update \
 && apt-get -y install \
 	build-essential \
 	fakeroot \
