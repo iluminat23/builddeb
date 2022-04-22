@@ -11,20 +11,28 @@ RUN apt-key add revpi.gpg \
 # install build basics
 RUN \
 mv /etc/apt/sources.list /etc/apt/sources.list.bak \
-&& echo "deb http://mirror.chaoticum.net/rpi/raspbian/ buster main contrib non-free rpi" > /etc/apt/sources.list \
+&& echo "deb http://mirror.cxserv.de/raspbian/ buster main contrib non-free rpi" > /etc/apt/sources.list \
 && apt-get update \
 && apt-get -y install \
 	ca-certificates \
 	openssl \
-&& mv /etc/apt/sources.list.bak /etc/apt/sources.list \
-&& apt-get update \
-&& apt-get -y install \
+	apt-transport-https \
+&& mv /etc/apt/sources.list.bak /etc/apt/sources.list
+
+RUN \
+apt-get update \
+&& apt-get dist-upgrade -y
+RUN \
+apt-get --no-install-recommends -y install \
+	git \
 	build-essential \
 	fakeroot \
 	devscripts \
 	git-buildpackage \
-	eatmydata \
-&& apt-get clean \
+	eatmydata
+
+RUN \
+apt-get clean \
 && rm -rf /var/lib/apt/lists/*
 
 RUN install -d /work
