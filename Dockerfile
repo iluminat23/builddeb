@@ -14,20 +14,22 @@ mv /etc/apt/sources.list /etc/apt/sources.list.bak \
 && echo "deb http://mirror.cxserv.de/raspbian/ buster main contrib non-free rpi" > /etc/apt/sources.list \
 && apt-get update \
 && apt-get -y install \
+	apt-utils \
 	ca-certificates \
 	openssl \
-	apt-transport-https \
-&& mv /etc/apt/sources.list.bak /etc/apt/sources.list
+	apt-transport-https
+#&& mv /etc/apt/sources.list.bak /etc/apt/sources.list
 
 RUN \
 apt-get update \
 && apt-get dist-upgrade -y
 RUN \
-apt-get --no-install-recommends -y install \
+apt-get -y install \
 	git \
 	build-essential \
 	fakeroot \
 	devscripts \
+	equivs \
 	git-buildpackage \
 	eatmydata
 
